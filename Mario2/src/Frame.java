@@ -42,8 +42,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		
 		//collision is under paint because we want to check 
 		// multiple times per second ! not just a keypress
-		if(test.getY()<=gr.getY()-160) {
-			test.setY(test.getY()+5);
+		if(test.getY()>=gr.getY()-160) {
+			test.setY(gr.getY()-160);
+			test.setFallSpeed(0);
+			test.setGravity(0);
 		}
 		//check if there's overlap in the two objects x and y intervals
 		//Collision for Left

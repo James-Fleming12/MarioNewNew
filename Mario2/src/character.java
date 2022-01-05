@@ -20,12 +20,19 @@ import java.awt.Graphics;
 		private AffineTransform tx;
 		int x, y;
 		int speed; 
+		double fallSpeed, savedY; 
+		boolean grounded;
+				double gravity;
 		public character() {
 			img = getImage("/imgs/Mario standing.png"); //load the image for Tree
 			tx = AffineTransform.getTranslateInstance(x, y);
 			init(x, y); 				//initialize the location of the image
 										//use your variables
 			speed=0;
+			fallSpeed=0;
+			gravity=1.5;
+			grounded = false; 
+		
 		}
 	
 		public void changePicture(String newFileName) {
@@ -38,7 +45,12 @@ import java.awt.Graphics;
 			Graphics2D g2 = (Graphics2D) g;
 			g2.drawImage(img, tx, null);
 			x+=speed; 
+			y+=fallSpeed;
+			fallSpeed+=gravity; 
 			update();
+			if(gravity==0) {
+				grounded = true;
+			}
 		}
 		//lll
 		
@@ -48,12 +60,10 @@ import java.awt.Graphics;
 //				y=(int)(start+(-0.1*(i*i)+1000));
 //				update();
 //			}
-			int start = y;
-			int acc = 500;
-			int accChange = 0;
-			for(int i = 0; i<1000; i++) {
-				y=start+(acc-accChange);
-				accChange+=1; 
+			if(grounded) {
+				gravity = 1.5;
+				fallSpeed=50*-0.5;
+				grounded=false; 
 			}
 		}
 			//update the picture variable location
@@ -101,6 +111,23 @@ import java.awt.Graphics;
 		public void setY(int y) {
 			this.y = y;
 		}
+		public double getFallSpeed() {
+			return fallSpeed;
+		}
+
+		public void setFallSpeed(double fallSpeed) {
+			this.fallSpeed = fallSpeed;
+		}
+
+		public double getGravity() {
+			return gravity;
+		}
+
+		public void setGravity(double gravity) {
+			this.gravity = gravity;
+		}
+
+
 
 	}
 
