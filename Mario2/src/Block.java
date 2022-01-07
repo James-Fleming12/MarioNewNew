@@ -20,6 +20,7 @@ import java.awt.Graphics;
 		private AffineTransform tx;
 		private int x, y;
 				private boolean groundFound; 
+		private boolean onBlock; 
 		//add location attributes
 		public Block() {
 			x=300;
@@ -29,6 +30,7 @@ import java.awt.Graphics;
 			init(x, y); 				//initialize the location of the image
 										//use your variables
 			groundFound = true;
+			onBlock = false; 
 		}
 		public Block(int x) {
 			this.x=x;
@@ -95,5 +97,10 @@ import java.awt.Graphics;
 		public void setY(int y) {
 			this.y = y;
 		}
-
+		public boolean isOnBlock() {
+			return onBlock;
+		}
+		public void setOnBlock(boolean onBlock) {
+			this.onBlock = onBlock;
+		}
 	}	

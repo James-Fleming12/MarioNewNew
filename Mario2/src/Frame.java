@@ -39,7 +39,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	boolean onRight = false;
 	boolean onLeft = false;
 	Block block = new Block();
-	
+	boolean onBlock = false;
+	int whichBlock = 0; 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		test.paint(g);
@@ -50,13 +51,24 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 			bl.paint(g);
 		}
 		
-		for(Block bl : blockList) {
-			if(bl.getX()-30<test.getX() && bl.getX()+100>test.getX()) {
-				if(test.getY()<=bl.getY()) {
-					test.setY(bl.getY()-64);
+		for(int i = 0; i<blockList.size(); i++) {
+			if(blockList.get(i).getX()-50<test.getX() && blockList.get(i).getX()+30>test.getX()) {
+				if(test.getY()<=blockList.get(i).getY()-64 && test.getY()>=blockList.get(i).getY()-70) {
+					test.setY(blockList.get(i).getY()-64);
 					test.setFallSpeed(0);
 					test.setGravity(0);
+					test.setY(test.getY()+100);
+				}else {
+					test.setFallSpeed(-1);
+					test.setGravity(1.5);
 				}
+//				if(test.collisionPoint(blockList.get(i).getX(), blockList.get(i).getX()+64, blockList.get(i).getY(), blockList.get(i).getY()+64)) {
+//					test.setFallSpeed(0);
+//					test.setGravity(0);
+//				}else {
+//					test.setFallSpeed(-1);
+//					
+//				}
 			}
 		}
 		
@@ -82,11 +94,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 			for(Ground gr : groundList) {
 				gr.setX(gr.getX()-5);
 			}
+			for(Block bl : blockList) {
+				bl.setX(bl.getX()-5);
+			}
 		}
 		if(onLeft) {
 			test.setX(test.getX()+5);
 			for(Ground gr : groundList) {
 				gr.setX(gr.getX()+5);
+			}
+			for(Block bl : blockList) {
+				bl.setX(bl.getX()+5);
 			}
 		}
 

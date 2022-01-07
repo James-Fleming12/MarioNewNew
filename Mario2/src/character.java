@@ -61,6 +61,25 @@ import java.awt.Graphics;
 				grounded=false; 
 			}
 		}
+		public boolean collisionX(int n, int m) {
+			if(x+32>n && x<m) {
+				return true;
+			}
+			return false;
+		}
+		public boolean collisionY(int n, int m) {
+			if(y+64>n && y<m) {
+				return true;
+			}
+			return false;
+		}
+		public boolean collisionPoint(int x1, int x2, int y1, int y2) {
+			if(x+32>x1 && x<x2 && y+64>y1 && y<y2) {
+				return true;
+			}
+			return false;
+		}
+
 			//update the picture variable location
 		private void update() {
 			tx.setToTranslation(x,y);
