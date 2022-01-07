@@ -20,9 +20,9 @@ import java.awt.Graphics;
 		private AffineTransform tx;
 		int x, y;
 		int speed; 
-		double fallSpeed, savedY; 
+		double fallSpeed; 
 		boolean grounded;
-				double gravity;
+		double gravity;
 		public character() {
 			img = getImage("/imgs/Mario standing.png"); //load the image for Tree
 			tx = AffineTransform.getTranslateInstance(x, y);
@@ -55,11 +55,6 @@ import java.awt.Graphics;
 		//lll
 		
 		public void jump() {
-//			int start = y; 
-//			for(int i = -100; i<=100 ; i++) {
-//				y=(int)(start+(-0.1*(i*i)+1000));
-//				update();
-//			}
 			if(grounded) {
 				gravity = 1.5;
 				fallSpeed=50*-0.5;
@@ -69,12 +64,12 @@ import java.awt.Graphics;
 			//update the picture variable location
 		private void update() {
 			tx.setToTranslation(x,y);
-			tx.scale(0.5, 0.5);
+			tx.scale(0.2, 0.2);
 		}
 		
 		private void init(double a, double b) {
 			tx.setToTranslation(a, b);
-			tx.scale(.5, .5);
+			tx.scale(.2, .2);
 		}
 
 		private Image getImage(String path) {

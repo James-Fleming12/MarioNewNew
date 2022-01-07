@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -33,17 +34,37 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	character test =  new character();
 	Ground gr = new Ground();
+	ArrayList<Ground> groundList = new ArrayList<>();
+	ArrayList<Block> blockList = new ArrayList<>();
 	boolean onRight = false;
 	boolean onLeft = false;
+	Block block = new Block();
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		test.paint(g);
-		gr.paint(g);
+		for(Ground gr : groundList) {
+			gr.paint(g);
+		}
+		for(Block bl : blockList) {
+			bl.paint(g);
+		}
+		
+		for(Block bl : blockList) {
+			if(bl.getX()-30<test.getX() && bl.getX()+100>test.getX()) {
+				if(test.getY()<=bl.getY()) {
+					test.setY(bl.getY()-64);
+					test.setFallSpeed(0);
+					test.setGravity(0);
+				}
+			}
+		}
+		
 		
 		//collision is under paint because we want to check 
 		// multiple times per second ! not just a keypress
-		if(test.getY()>=gr.getY()-160) {
-			test.setY(gr.getY()-160);
+		if(test.getY()>=gr.getY()-64) {
+			test.setY(gr.getY()-64);
 			test.setFallSpeed(0);
 			test.setGravity(0);
 		}
@@ -52,16 +73,21 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		if(test.getX()>=400) {
 			onRight=true;
 		}
+		
 		if(test.getX()<0) {
 			onLeft=true;
 		}
 		if(onRight) {
 			test.setX(test.getX()-5);
-			gr.setX(gr.getX()-5);
+			for(Ground gr : groundList) {
+				gr.setX(gr.getX()-5);
+			}
 		}
 		if(onLeft) {
 			test.setX(test.getX()+5);
-			gr.setX(gr.getX()+5);
+			for(Ground gr : groundList) {
+				gr.setX(gr.getX()+5);
+			}
 		}
 
 	}
@@ -71,7 +97,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	
 	public Frame() {
-		JFrame f = new JFrame("Pong");
+		JFrame f = new JFrame("Mario");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(800,600);
 		f.add(this);
@@ -79,6 +105,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		t = new Timer(16, this);
 		t.start();
 		f.setVisible(true);
+		for(int i = 0; i<3; i++) {
+			Ground temp = new Ground(1000*i); 
+			groundList.add(temp);
+		}
+		blockList.add(new Block());
 	}
 	
 	public static void main(String[] arg) {

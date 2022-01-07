@@ -23,7 +23,16 @@ import java.awt.Graphics;
 		//add location attributes
 		public Ground() {
 			x=0;
-			y=450;
+			y=500;
+			img = getImage("/imgs/marioground.png"); //load the image for Tree
+			tx = AffineTransform.getTranslateInstance(x, y);
+			init(x, y); 				//initialize the location of the image
+										//use your variables
+			groundFound = true;
+		}
+		public Ground(int x) {
+			this.x=x;
+			y=500;
 			img = getImage("/imgs/marioground.png"); //load the image for Tree
 			tx = AffineTransform.getTranslateInstance(x, y);
 			init(x, y); 				//initialize the location of the image
