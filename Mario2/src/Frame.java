@@ -33,6 +33,7 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	character test =  new character();
+	character peach = new character();
 	Ground gr = new Ground();
 	ArrayList<Ground> groundList = new ArrayList<>();
 	ArrayList<Block> blockList = new ArrayList<>();
@@ -44,6 +45,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		test.paint(g);
+		peach.paint(g);
 		for(Ground gr : groundList) {
 			gr.paint(g);
 		}
@@ -59,7 +61,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 					test.setGravity(0);
 					test.setY(test.getY()+100);
 				}else {
-					test.setFallSpeed(-1);
+					test.setFallSpeed(0);
 					test.setGravity(1.5);
 				}
 //				if(test.collisionPoint(blockList.get(i).getX(), blockList.get(i).getX()+64, blockList.get(i).getY(), blockList.get(i).getY()+64)) {
