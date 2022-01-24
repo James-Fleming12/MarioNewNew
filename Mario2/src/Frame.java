@@ -33,7 +33,7 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	character test =  new character();
-	character peach = new character();
+	peach other = new peach();
 	Ground gr = new Ground();
 	ArrayList<Ground> groundList = new ArrayList<>();
 	ArrayList<Block> blockList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		test.paint(g);
-		peach.paint(g);
+		other.paint(g);
 		for(Ground gr : groundList) {
 			gr.paint(g);
 		}
@@ -82,33 +82,45 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 			test.setFallSpeed(0);
 			test.setGravity(0);
 		}
+		if(other.getY()>=gr.getY()-100) {
+			other.setY(gr.getY()-100);
+			other.setFallSpeed(0);
+			other.setGravity(0);
+		}
 		//check if there's overlap in the two objects x and y intervals
 		//Collision for Left
 		if(test.getX()>=400) {
+			onRight=true;
+		}
+		if(other.getX()>=400) {
 			onRight=true;
 		}
 		
 		if(test.getX()<0) {
 			onLeft=true;
 		}
-		if(onRight) {
-			test.setX(test.getX()-5);
-			for(Ground gr : groundList) {
-				gr.setX(gr.getX()-5);
-			}
-			for(Block bl : blockList) {
-				bl.setX(bl.getX()-5);
-			}
+		if(other.getX()<0) {
+			onLeft=true;
 		}
-		if(onLeft) {
-			test.setX(test.getX()+5);
-			for(Ground gr : groundList) {
-				gr.setX(gr.getX()+5);
-			}
-			for(Block bl : blockList) {
-				bl.setX(bl.getX()+5);
-			}
-		}
+		//if(onRight) {
+			//test.setX(test.getX()-5);
+			//other.setX(test.getX()-5);
+			//for(Ground gr : groundList) {
+			//	gr.setX(gr.getX()-5);
+			//}
+			//for(Block bl : blockList) {
+			//	bl.setX(bl.getX()-5);
+			//}
+		//}
+		//if(onLeft) {
+			//test.setX(test.getX()+5);
+			//other.setX(test.getX()+5);
+			//for(Ground gr : groundList) {
+				//gr.setX(gr.getX()+5);
+			//}
+			//for(Block bl : blockList) {
+			//bl.setX(bl.getX()+5);
+			//}
 
 	}
 	
@@ -150,6 +162,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		if(arg0.getKeyCode()==37) {
 			test.setSpeed(-5);
 			test.changePicture("/imgs/left mario running.gif");
+		}		if(arg0.getKeyCode()==68) {
+			other.setSpeed(5);
+			
+		}if(arg0.getKeyCode()==65) {
+			other.setSpeed(-5);
+			
 		}
 
 
@@ -167,6 +185,16 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 			test.setSpeed(0);
 			onLeft =false; 
 			test.changePicture("/imgs/mario leftstanding.png");
+		}
+		if(arg0.getKeyCode()==68) {
+			other.setSpeed(0);
+			onRight=false;
+			test.changePicture("peach.png");
+			
+		}if(arg0.getKeyCode()==65) {
+		other.setSpeed(0);
+			onLeft =false; 
+			
 		}
 	}
 	@Override
