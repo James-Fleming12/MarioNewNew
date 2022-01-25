@@ -34,6 +34,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	character test =  new character();
 	peach other = new peach();
+	Music music1= new Music("mario wahoo.wav", true);
 	Ground gr = new Ground();
 	ArrayList<Ground> groundList = new ArrayList<>();
 	ArrayList<Block> blockList = new ArrayList<>();
@@ -158,6 +159,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		}
 		if(arg0.getKeyCode()==38) {
 			test.jump();
+		}if(arg0.getKeyCode()==87) {
+			other.jump();
 		}
 		if(arg0.getKeyCode()==37) {
 			test.setSpeed(-5);
@@ -189,7 +192,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		if(arg0.getKeyCode()==68) {
 			other.setSpeed(0);
 			onRight=false;
-			test.changePicture("peach.png");
+			
 			
 		}if(arg0.getKeyCode()==65) {
 		other.setSpeed(0);
