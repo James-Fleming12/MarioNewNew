@@ -33,6 +33,10 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements KeyListener, ActionListener{
 	
 	character test =  new character();
+	stock peach1= new stock(0, 10);
+	stock peach2 = new stock(50,10);
+	stock peach3 = new stock(100, 10);
+	stock2 mario1 = new stock2(500, 10);
 	peach other = new peach();
 	Music music1= new Music("mario wahoo.wav", true);
 	Ground gr = new Ground();
@@ -47,6 +51,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
 		super.paintComponent(g);
 		test.paint(g);
 		other.paint(g);
+		peach1.paint(g);
+		peach2.paint(g);
+		peach3.paint(g);
+		mario1.paint(g);
 		for(Ground gr : groundList) {
 			gr.paint(g);
 		}
